@@ -27,6 +27,7 @@ fi
 TAIL_MAGIC=$(tail -c 4 "$SIGNED_FILE")
 if [ "$TAIL_MAGIC" = "IMCU" ]; then
     echo "Error: Target file '$SIGNED_FILE' already appears to be signed (ends with 'IMCU')"
+    rm -f "$SIGNED_FILE"
     exit 1
 fi
 
@@ -36,6 +37,7 @@ SIG_FILE="sigbin.bin"
 openssl dgst -sha512 -sign "$PRIVATE_KEY" -out "$SIG_FILE" "$SIGNED_FILE"
 if [ $? -ne 0 ]; then
     echo "Error: OpenSSL signing failed."
+    rm -f "$SIGNED_FILE"
     rm -f "$SIG_FILE"
     exit 1
 fi
