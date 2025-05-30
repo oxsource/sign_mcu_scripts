@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ $# -lt 2 ]; then
-    echo "usage: $0 <--sign|--inspect> <path>"
+    echo "usage: $0 <sign|inspect> <path>"
     exit 1
 fi
 
